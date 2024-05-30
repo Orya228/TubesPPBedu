@@ -1,4 +1,6 @@
 import 'package:e_learning/bloc/register/register_cubit.dart';
+import 'package:e_learning/styles/colors.dart';
+import 'package:e_learning/styles/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,40 +48,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
         },
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
+            padding: EdgeInsets.only(top: 100),
             children: [
-              const Center(
+              Center(
                 child: Text(
                   "Registrasi",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff000000)),
+                  style: kHeading5.copyWith(color: kHitam),
                 ),
               ),
               const SizedBox(
                 height: 65,
               ),
-              const Text(
-                "Email",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-              ),
+              Text("Email", style: kHeading6.copyWith(color: kHitam)),
               Container(
                 width: 310,
                 height: 35,
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Color(0xff000000).withOpacity(0.5)),
+                  border: Border.all(color: kHitam.withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Center(
                   child: TextFormField(
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 13),
+                      contentPadding: EdgeInsets.all(12),
                     ),
                     controller: emailEdc,
                   ),
@@ -88,9 +84,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 "Password",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: kHeading6.copyWith(color: kHitam),
               ),
               Container(
                 width: 310,
@@ -98,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Color(0xff000000).withOpacity(0.5)),
+                  border: Border.all(color: kHitam.withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Center(
@@ -106,7 +102,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: passEdc,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 13),
+                        horizontal: 12,
+                      ),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -135,15 +132,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         .register(email: emailEdc.text, password: passEdc.text);
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff4067CB),
+                      backgroundColor: kBiru,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
-                  child: const Text(
+                  child: Text(
                     "Registrasi",
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.white),
+                    style: kButton1.copyWith(color: kPutih),
                   )),
               const SizedBox(
                 height: 25,
@@ -151,21 +145,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Sudah punya akun ?",
-                    style:
-                        TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                    style: kSubtitle1.copyWith(color: kHitam),
                   ),
                   TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/login');
                       },
-                      child: const Text(
+                      child: Text(
                         "Login",
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12,
-                            color: Color(0xff0961F5)),
+                        style: kSubtitle1.copyWith(color: kBiruMuda),
                       ))
                 ],
               )

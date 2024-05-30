@@ -1,3 +1,5 @@
+import 'package:e_learning/styles/colors.dart';
+import 'package:e_learning/styles/text_style.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,26 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 image: AssetImage('assets/icons/logo.png'),
               ),
             ),
-            const Text(
+            Text(
               "Let’s Get Started",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff000000),
-              ),
+              style: kHeading5.copyWith(color: kHitam),
             ),
             ConstrainedBox(
               constraints: const BoxConstraints(
                 maxWidth: 237,
               ),
-              child: const Text(
+              child: Text(
                 "Hello, Edupedia users! Let's start the learning journey with this app.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.normal,
-                  color: Color(0xffB5B5B5),
-                ),
+                style: kSubtitle2.copyWith(color: kGray),
               ),
             ),
             const SizedBox(height: 20),
@@ -49,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Navigator.pushNamed(context, '/login');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff3D4DE0),
+                backgroundColor: kBiru,
                 padding: const EdgeInsets.symmetric(
                   vertical: 9,
                   horizontal: 140,
@@ -60,12 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'Start',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
+                style: kButton1.copyWith(color: kPutih),
               ),
             ),
           ],

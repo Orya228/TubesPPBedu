@@ -1,3 +1,5 @@
+import 'package:e_learning/styles/colors.dart';
+import 'package:e_learning/styles/text_style.dart';
 import 'package:e_learning/ui/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -63,35 +65,29 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         },
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 100),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
+            padding: EdgeInsets.only(top: 100),
             children: [
               const SafeArea(
                 child: Image(
                   image: AssetImage('assets/icons/logo.png'),
                 ),
               ),
-              const Center(
+              Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "Selamat Datang",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff000000),
-                      ),
+                      style: kHeading5.copyWith(color: kHitam),
                     ),
                     SizedBox(
                       width: 230,
                       child: Text(
                         "Mari bantu siswa menjadi lebih pintar dengan belajar bersama kami.",
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xffB5B5B5),
-                        ),
+                        style: kSubtitle2.copyWith(color: kGray),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -101,26 +97,23 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
+              Text(
                 "Email",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: kHeading6.copyWith(color: kHitam),
               ),
               Container(
                 width: 310,
                 height: 35,
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Color(0xff000000).withOpacity(0.5)),
+                  border: Border.all(color: kHitam.withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Center(
                   child: TextFormField(
                     decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 13),
-                    ),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(12)),
                     controller: emailEdc,
                   ),
                 ),
@@ -128,17 +121,16 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
+              Text(
                 "Password",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: kHeading6.copyWith(color: kHitam),
               ),
               Container(
                 width: 310,
                 height: 35,
                 margin: const EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Color(0xff000000).withOpacity(0.5)),
+                  border: Border.all(color: kHitam.withOpacity(0.5)),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Center(
@@ -146,7 +138,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passEdc,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 13),
+                        horizontal: 12,
+                      ),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -175,27 +168,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         .login(email: emailEdc.text, password: passEdc.text);
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff4067CB),
+                      backgroundColor: kBiru,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
-                  child: const Text(
+                  child: Text(
                     "Login",
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.white),
+                    style: kButton1.copyWith(color: kPutih),
                   )),
               const SizedBox(
                 height: 9.0,
               ),
               Column(
                 children: [
-                  const Text(
+                  Text(
                     'atau lanjut dengan',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                    ),
+                    style: kSubtitle1.copyWith(color: kHitam),
                   ),
                   const SizedBox(height: 9),
                   GestureDetector(
@@ -210,22 +197,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Belum punya akun?",
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 12),
+                        style: kSubtitle1.copyWith(color: kHitam),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/register');
                         },
-                        child: const Text(
-                          "Register",
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12,
-                              color: Color(0xff0961F5)),
-                        ),
+                        child: Text("Register",
+                            style: kSubtitle1.copyWith(color: kBiruMuda)),
                       )
                     ],
                   )
