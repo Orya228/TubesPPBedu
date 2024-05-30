@@ -1,10 +1,12 @@
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
+import 'package:e_learning/ui/pages/home/pdf_viewer.dart';
 import 'package:flutter/material.dart';
 
 class Materi extends StatelessWidget {
   final String? kelas;
-  const Materi({Key? key, this.kelas}) : super(key: key);
+  final String? lib1;
+  const Materi({Key? key, this.kelas, this.lib1}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,15 +29,18 @@ class Materi extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
             children: [
-              _listMateri('Bahasa Indonesia', 'indonesia.png'),
-              _listMateri('Matematika', 'matematika.png'),
-              _listMateri('Ilmu Pengetahuan Alam (IPA)', 'ipa.png'),
-              _listMateri('Ilmu Pengetahuan Sosial (IPS)', 'ips.png'),
-              _listMateri('Pendidikan Kewarganegaraan', 'pkn.png'),
-              _listMateri('Pendidikan Agama Islam', 'agama.png'),
-              _listMateri('Seni Budaya', 'seni_budaya.png'),
-              _listMateri('PJOK', 'pjok.png'),
-              _listMateri('Bahasa Inggris', 'english.png'),
+              _listMateri(context, 'Bahasa Indonesia', 'indonesia', '$lib1'),
+              _listMateri(context, 'Matematika', 'matematika', '$lib1'),
+              _listMateri(
+                  context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa', '$lib1'),
+              _listMateri(
+                  context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips', '$lib1'),
+              _listMateri(
+                  context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1'),
+              _listMateri(context, 'Pendidikan Agama Islam', 'agama', '$lib1'),
+              _listMateri(context, 'Seni Budaya', 'seni_budaya', '$lib1'),
+              _listMateri(context, 'PJOK', 'pjok', '$lib1'),
+              _listMateri(context, 'Bahasa Inggris', 'english', '$lib1'),
             ],
           ),
         ),
@@ -43,7 +48,8 @@ class Materi extends StatelessWidget {
     );
   }
 
-  Widget _listMateri(String nama, String gambar) {
+  Widget _listMateri(
+      BuildContext context, String nama, String gambar, String lib1) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Card(
@@ -60,14 +66,14 @@ class Materi extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  '$nama',
+                  nama,
                   style: kTitle3,
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              Image.asset('assets/sampul/${gambar}'),
+              Image.asset('assets/sampul/$gambar.png'),
               const SizedBox(
                 height: 12,
               ),
@@ -78,7 +84,15 @@ class Materi extends StatelessWidget {
                     width: 137,
                     height: 35,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyPdfViewer(
+                                  judul: nama, lib1: lib1, lib2: gambar),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kBiru,
                             shape: RoundedRectangleBorder(

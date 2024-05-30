@@ -46,12 +46,12 @@ class HomePage extends StatelessWidget {
                     ),
                     shrinkWrap: true,
                     children: [
-                      _cardKelas(context, 'Kelas 1'),
-                      _cardKelas(context, 'Kelas 2'),
-                      _cardKelas(context, 'Kelas 3'),
-                      _cardKelas(context, 'Kelas 4'),
-                      _cardKelas(context, 'Kelas 5'),
-                      _cardKelas(context, 'Kelas 6'),
+                      _cardKelas(context, 'Kelas 1', 'kelas_1'),
+                      _cardKelas(context, 'Kelas 2', 'kelas_2'),
+                      _cardKelas(context, 'Kelas 3', 'kelas_3'),
+                      _cardKelas(context, 'Kelas 4', 'kelas_4'),
+                      _cardKelas(context, 'Kelas 5', 'kelas_5'),
+                      _cardKelas(context, 'Kelas 6', 'kelas_6'),
                     ],
                   ),
                 )
@@ -73,12 +73,14 @@ class HomePage extends StatelessWidget {
   InkWell _cardKelas(
     BuildContext context,
     String kelas,
+    String lib1,
   ) {
     return InkWell(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Materi(kelas: kelas)),
+          MaterialPageRoute(
+              builder: (context) => Materi(kelas: kelas, lib1: lib1)),
         );
       },
       child: Card(
