@@ -6,12 +6,10 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 class MyPdfViewer extends StatefulWidget {
   // const MyPdfViewer({super.key});
   final String? judul;
-  final String? lib1;
-  final String? lib2;
+  final String? dir;
 
   // MyPdfViewer({required this.judul});
-  const MyPdfViewer({Key? key, this.judul, this.lib1, this.lib2})
-      : super(key: key);
+  const MyPdfViewer({Key? key, this.judul, this.dir}) : super(key: key);
 
   @override
   State<MyPdfViewer> createState() => _MyPdfViewerState();
@@ -35,7 +33,7 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
           },
         ),
       ),
-      body: SfPdfViewer.asset('assets/buku/${widget.lib1}-${widget.lib2}.pdf'),
+      body: SfPdfViewer.asset('${widget.dir}'),
       // body: SfPdfViewer.asset('assets/buku/kelas_1-pkn.pdf'),
     );
   }

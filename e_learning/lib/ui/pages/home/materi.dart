@@ -1,11 +1,17 @@
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
-import 'package:e_learning/ui/pages/home/pdf_viewer.dart';
+import 'package:e_learning/ui/pages/content/pdf_viewer.dart';
+import 'package:e_learning/ui/pages/content/yt_viewer.dart';
 import 'package:flutter/material.dart';
 
 class Materi extends StatelessWidget {
   final String? kelas;
   final String? lib1;
+
+  String getDirectory(String kelas, String buku) {
+    return 'assets/buku/$kelas-$buku.pdf';
+  }
+
   const Materi({Key? key, this.kelas, this.lib1}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -50,6 +56,7 @@ class Materi extends StatelessWidget {
 
   Widget _listMateri(
       BuildContext context, String nama, String gambar, String lib1) {
+    String directory = getDirectory(lib1, gambar);
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Card(
@@ -88,8 +95,8 @@ class Materi extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MyPdfViewer(
-                                  judul: nama, lib1: lib1, lib2: gambar),
+                              builder: (context) =>
+                                  MyPdfViewer(judul: nama, dir: directory),
                             ),
                           );
                         },
@@ -107,7 +114,17 @@ class Materi extends StatelessWidget {
                     width: 137,
                     height: 35,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => YoutubePlayerExample(
+                                kelas: kelas,
+                                Materi: nama,
+                              ),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: kPutih,
                             side: BorderSide(color: kBiru),
