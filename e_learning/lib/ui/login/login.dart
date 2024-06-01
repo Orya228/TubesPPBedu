@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:e_learning/bloc/login/login_cubit.dart';
+import 'package:e_learning/utils/NavigationService.dart';
 
-import '../../utils/routes.dart';
+// import '../../utils/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailEdc = TextEditingController();
   final passEdc = TextEditingController();
+  final NavigationService _navigationService = NavigationService();
   bool passInvisible = false;
 
   Future<UserCredential> signInWithGoogle() async {
@@ -28,11 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
       accessToken: gAuth.accessToken,
       idToken: gAuth.idToken,
     );
-    return await FirebaseAuth.instance.signInWithCredential(credential).then(
-        (value) async => await Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-            (route) => false));
+    // return await FirebaseAuth.instance.signInWithCredential(credential).then(
+    //     (value) async => await Navigator.pushAndRemoveUntil(
+    //         context,
+    //         MaterialPageRoute(builder: (context) => HomeScreen()),
+    //         (route) => false));
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    User? user = userCredential.user;
+
+    if (user != null) {
+      await _navigationService.checkUserDataAndNavigate(
+          context, user); // Panggil fungsi dari NavigationService
+    }
+    return userCredential;
   }
 
   @override
@@ -55,13 +66,15 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           if (state is LoginSuccess) {
             // context.read<AuthCubit>().loggedIn();
+            User user = state.user;
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
                 content: Text(state.msg),
                 backgroundColor: Colors.green,
               ));
-            Navigator.pushNamedAndRemoveUntil(context, rHome, (route) => false);
+            _navigationService.checkUserDataAndNavigate(context, user);
+            // Navigator.pushNamedAndRemoveUntil(context, rHome, (route) => false);
           }
         },
         child: Container(

@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthRepo {
   final _auth = FirebaseAuth.instance;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<UserCredential> login(
+      {required String email, required String password}) async {
     try {
       final user = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+      return user;
     } on FirebaseException catch (e) {
       throw e.message ?? 'Something wrong!';
     } catch (e) {

@@ -16,6 +16,11 @@ TextStyle kTitle3 = GoogleFonts.jost(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle kHeading4 = GoogleFonts.poppins(
+  fontSize: 30,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle kHeading5 = GoogleFonts.poppins(
   fontSize: 24,
   fontWeight: FontWeight.w700,
@@ -39,6 +44,11 @@ TextStyle kSubtitle2 = GoogleFonts.poppins(
 TextStyle kSubtitle3 = GoogleFonts.mulish(
   fontSize: 13,
   fontWeight: FontWeight.w700,
+);
+
+TextStyle kSubtitle4 = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.w500,
 );
 
 TextStyle kButton1 = GoogleFonts.mulish(

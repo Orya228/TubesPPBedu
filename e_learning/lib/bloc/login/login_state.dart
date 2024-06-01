@@ -9,8 +9,9 @@ class LoginLoading extends LoginState {}
 
 class LoginSuccess extends LoginState {
   final String msg;
+  final User user;
 
-  LoginSuccess(this.msg);
+  LoginSuccess(this.msg, this.user);
 }
 
 class LoginFailure extends LoginState {

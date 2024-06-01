@@ -3,6 +3,7 @@ import 'package:e_learning/bloc/register/register_cubit.dart';
 import 'package:e_learning/firebase_options.dart';
 import 'package:e_learning/ui/pages/home_screen.dart';
 import 'package:e_learning/ui/login/splash.dart';
+import 'package:e_learning/utils/NavigationService.dart';
 import 'package:e_learning/utils/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,11 +15,13 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  // const MyApp({Key? key}) : super(key: key);
+  final NavigationService _navigationService = NavigationService();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,11 @@ class MyApp extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
-              return const HomeScreen();
+              _navigationService.checkUserDataAndNavigate(
+                  context, snapshot.data!);
+              return Center(
+                child: Text("Loading"),
+              );
             } else if (snapshot.hasError) {
               return const Center(
                 child: Text('Something went wrong'),
