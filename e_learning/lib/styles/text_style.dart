@@ -51,6 +51,11 @@ TextStyle kSubtitle4 = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
 );
 
+TextStyle kSubtitle5 = GoogleFonts.inter(
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle kButton1 = GoogleFonts.mulish(
   fontSize: 12,
   fontWeight: FontWeight.w400,

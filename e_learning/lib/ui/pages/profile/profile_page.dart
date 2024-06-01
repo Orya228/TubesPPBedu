@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
 import 'package:e_learning/ui/login/login.dart';
+import 'package:e_learning/ui/pages/profile/edit_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -38,102 +39,126 @@ class _ProfilePage extends State<ProfilePage> {
           }
           Map<String, dynamic> userData =
               snapshot.data!.data() as Map<String, dynamic>;
-          // return Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       Text("Nama: ${userData['nama']}",
-          //           style: TextStyle(fontSize: 18)),
-          //       Text("Email: ${userData['email']}",
-          //           style: TextStyle(fontSize: 18)),
-          //       Text("Gender: ${userData['gender']}",
-          //           style: TextStyle(fontSize: 18)),
-          //       Text("Kelas: ${userData['kelas']}",
-          //           style: TextStyle(fontSize: 18)),
-          //       Text("Tanggal Lahir: ${userData['tanggal_lahir']}",
-          //           style: TextStyle(fontSize: 18)),
-          //     ],
-          //   ),
-          // );
-          return Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 102),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "MY PROFILE",
-                  style: kHeading4,
-                ),
-                const SizedBox(
-                  height: 65,
-                ),
-                Image.asset('assets/icons/avatar.png'),
-                const SizedBox(
-                  height: 12,
-                ),
-                _datadiri('Nama', userData['nama']),
-                _datadiri('Email', userData['email']),
-                _datadiri('Genader', userData['gender']),
-                _datadiri('Kelas', userData['kelas']),
-                _datadiri('Tanggal Lahir', userData['tanggal_lahir']),
-                SizedBox(
-                  height: 80,
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      GoogleSignIn().signOut();
-                      FirebaseAuth.instance
-                          .signOut()
-                          .then((value) => Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                              (route) => false));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: kPutih,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        side: BorderSide(color: kBiru)),
-                    child: Text(
-                      'Logout',
-                      style: kSubtitle1,
+          return Column(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 300,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/icons/backgrund1.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                  Positioned(
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(left: 9, right: 9, top: 230),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/icons/avatar.png',
+                            width: 129,
+                            height: 120,
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            userData['nama'],
+                            style: kTitle1,
+                          ),
+                          Text(
+                            userData['email'],
+                            style: kSubtitle1,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: kPutih,
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: kGray,
+                                  blurRadius: 5,
+                                  offset: Offset.fromDirection(2),
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EditProfile(),
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                          'assets/icons/editprofile.png'),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Edit profile',
+                                        style: kSubtitle3,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    GoogleSignIn().signOut();
+                                    FirebaseAuth.instance.signOut().then(
+                                        (value) => Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const LoginScreen(),
+                                            ),
+                                            (route) => false));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Image.asset('assets/icons/logout.png'),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Log out',
+                                        style: kSubtitle3,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
           );
         },
       ),
-    );
-  }
-
-  Row _datadiri(String judul, dynamic isi) {
-    return Row(
-      children: [
-        Container(
-          width: 100,
-          child: Text(
-            judul,
-            style: kSubtitle1.copyWith(color: kGray),
-          ),
-        ),
-        Expanded(
-          child: Text(
-            ": $isi",
-            style: kSubtitle4,
-            textAlign: TextAlign.left,
-          ),
-        ),
-      ],
     );
   }
 }

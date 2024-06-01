@@ -1,6 +1,5 @@
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
-import 'package:e_learning/ui/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,18 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
       accessToken: gAuth.accessToken,
       idToken: gAuth.idToken,
     );
-    // return await FirebaseAuth.instance.signInWithCredential(credential).then(
-    //     (value) async => await Navigator.pushAndRemoveUntil(
-    //         context,
-    //         MaterialPageRoute(builder: (context) => HomeScreen()),
-    //         (route) => false));
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     User? user = userCredential.user;
 
     if (user != null) {
-      await _navigationService.checkUserDataAndNavigate(
-          context, user); // Panggil fungsi dari NavigationService
+      await _navigationService.checkUserDataAndNavigate(context, user);
     }
     return userCredential;
   }

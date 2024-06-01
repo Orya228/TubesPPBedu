@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.hasData) {
               _navigationService.checkUserDataAndNavigate(
                   context, snapshot.data!);
-              return Center(
+              return const Center(
                 child: Text("Loading"),
               );
             } else if (snapshot.hasError) {
