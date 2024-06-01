@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
 import 'package:e_learning/ui/login/login.dart';
-import 'package:e_learning/ui/pages/profile/edit_profile.dart';
+import 'package:e_learning/ui/pages/profile/liat_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -100,7 +100,7 @@ class _ProfilePage extends State<ProfilePage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => EditProfile(),
+                                        builder: (context) => LiatProfile(),
                                       ),
                                     );
                                   },

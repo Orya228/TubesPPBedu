@@ -1,19 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
-import 'package:e_learning/ui/login/login.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
-class EditProfile extends StatefulWidget {
-  const EditProfile({super.key});
+class LiatProfile extends StatefulWidget {
+  const LiatProfile({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfile();
+  State<LiatProfile> createState() => _LiatProfile();
 }
 
-class _EditProfile extends State<EditProfile> {
+class _LiatProfile extends State<LiatProfile> {
   final user = FirebaseAuth.instance.currentUser?.uid;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -101,8 +100,26 @@ class _EditProfile extends State<EditProfile> {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
+              ),
+              Expanded(child: Container()),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(25.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kBiru,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Edit Profile',
+                    style: kButton1.copyWith(color: kPutih),
+                  ),
+                ),
               ),
             ],
           );
