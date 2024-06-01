@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
+import 'package:e_learning/ui/pages/profile/edit_profile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,14 @@ class _LiatProfile extends State<LiatProfile> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfile(),
+                      ),
+                    );
+                  },
                   child: Text(
                     'Edit Profile',
                     style: kButton1.copyWith(color: kPutih),

@@ -17,7 +17,6 @@ class _Filldatascreen extends State<Filldatascreen> {
   final TextEditingController namaController = TextEditingController();
   final TextEditingController kelasController = TextEditingController();
   final TextEditingController tanggalController = TextEditingController();
-  String? _gender;
   String? _kelas;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final User? user = FirebaseAuth.instance.currentUser;
@@ -30,11 +29,16 @@ class _Filldatascreen extends State<Filldatascreen> {
         child: ListView(
           padding: const EdgeInsets.only(top: 100),
           children: [
+            Text(
+              "Personal Data",
+              style: kTitle2.copyWith(color: kHitam),
+            ),
+            Text(
+              "Fill in your personal data to start the journey",
+              style: kSubtitle1.copyWith(color: kPutihGelap),
+            ),
             Center(
-              child: Text(
-                "Isi Data Diri",
-                style: kHeading5.copyWith(color: kHitam),
-              ),
+              child: Image.asset('assets/icons/image1.png'),
             ),
             const SizedBox(
               height: 65,
@@ -62,43 +66,6 @@ class _Filldatascreen extends State<Filldatascreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Nama tidak boleh kosong';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  Text("Gender", style: kHeading6.copyWith(color: kHitam)),
-                  const SizedBox(height: 5),
-                  DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      contentPadding: EdgeInsets.all(12),
-                    ),
-                    value: _gender,
-                    items: ['Laki-laki', 'Perempuan']
-                        .map((label) => DropdownMenuItem(
-                              child: Text(
-                                label,
-                                style: kHeading6.copyWith(color: kHitam),
-                              ),
-                              value: label,
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _gender = value;
-                      });
-                    },
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Pilih gender';
                       }
                       return null;
                     },
@@ -186,8 +153,6 @@ class _Filldatascreen extends State<Filldatascreen> {
                               'userID': user?.uid,
                               'nama': namaController.text,
                               'email': user?.email,
-                              'gender': _gender,
-                              // 'kelas': _kelas,
                               'kelas': int.parse(_kelas!),
                               'tanggal_lahir': tanggalController.text,
                               'timestamp': FieldValue.serverTimestamp(),

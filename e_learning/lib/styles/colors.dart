@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color kPutih = Color(0xFFFFFFFF);
+const Color kPutihGelap = Color(0xFFC7C9D9);
 const Color kBgGray = Color(0xFFe5e5e5);
 const Color kBiru = Color(0xFF4067CB);
 const Color kBiruMuda = Color(0xFF0961F5);
