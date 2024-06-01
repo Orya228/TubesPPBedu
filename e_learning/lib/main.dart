@@ -2,6 +2,7 @@ import 'package:e_learning/bloc/login/login_cubit.dart';
 import 'package:e_learning/bloc/register/register_cubit.dart';
 import 'package:e_learning/firebase_options.dart';
 import 'package:e_learning/ui/login/splash.dart';
+import 'package:e_learning/ui/pages/loading_screen.dart';
 import 'package:e_learning/utils/NavigationService.dart';
 import 'package:e_learning/utils/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,9 +44,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.hasData) {
               _navigationService.checkUserDataAndNavigate(
                   context, snapshot.data!);
-              return const Center(
-                child: Text("Loading"),
-              );
+              return LoadingScreen();
             } else if (snapshot.hasError) {
               return const Center(
                 child: Text('Something went wrong'),

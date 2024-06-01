@@ -18,7 +18,8 @@ class _HomeScreen extends State<HomeScreen> {
   int _selectedIndex = 0;
   static List<Widget> pages = [
     HomePage(),
-    SchedulePage(),
+    // LoadingScreen(),
+    ScheduleScreen(),
     TrainingPage(),
     ProfilePage(),
   ];

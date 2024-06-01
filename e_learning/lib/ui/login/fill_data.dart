@@ -53,14 +53,14 @@ class _Filldatascreen extends State<Filldatascreen> {
                   TextFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      contentPadding: EdgeInsets.all(12),
+                      contentPadding: const EdgeInsets.all(12),
                     ),
                     controller: namaController,
                     validator: (value) {
@@ -76,14 +76,14 @@ class _Filldatascreen extends State<Filldatascreen> {
                   DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      contentPadding: EdgeInsets.all(12),
+                      contentPadding: const EdgeInsets.all(12),
                     ),
                     value: _kelas,
                     items: ['1', '2', '3', '4', '5', '6']
@@ -114,14 +114,14 @@ class _Filldatascreen extends State<Filldatascreen> {
                   TextFormField(
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kHitam),
+                        borderSide: const BorderSide(color: kHitam),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      contentPadding: EdgeInsets.all(12),
+                      contentPadding: const EdgeInsets.all(12),
                     ),
                     controller: tanggalController,
                     keyboardType: TextInputType.datetime,
