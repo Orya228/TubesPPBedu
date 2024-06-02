@@ -29,13 +29,13 @@ class _ProfilePage extends State<ProfilePage> {
         future: getUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           }
           if (!snapshot.hasData || !snapshot.data!.exists) {
-            return Center(child: Text("No data found"));
+            return const Center(child: Text("No data found"));
           }
           Map<String, dynamic> userData =
               snapshot.data!.data() as Map<String, dynamic>;
@@ -56,7 +56,8 @@ class _ProfilePage extends State<ProfilePage> {
                   Positioned(
                     child: Container(
                       width: double.infinity,
-                      padding: EdgeInsets.only(left: 9, right: 9, top: 230),
+                      padding:
+                          const EdgeInsets.only(left: 9, right: 9, top: 230),
                       child: Column(
                         children: [
                           Image.asset(
@@ -100,7 +101,8 @@ class _ProfilePage extends State<ProfilePage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LiatProfile(),
+                                        builder: (context) =>
+                                            const LiatProfile(),
                                       ),
                                     );
                                   },

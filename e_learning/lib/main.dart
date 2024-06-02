@@ -1,6 +1,7 @@
 import 'package:e_learning/bloc/login/login_cubit.dart';
 import 'package:e_learning/bloc/register/register_cubit.dart';
 import 'package:e_learning/firebase_options.dart';
+import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/ui/login/splash.dart';
 import 'package:e_learning/ui/pages/loading_screen.dart';
 import 'package:e_learning/utils/NavigationService.dart';
@@ -15,12 +16,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // runApp(const MyApp());
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // const MyApp({Key? key}) : super(key: key);
   final NavigationService _navigationService = NavigationService();
 
   @override
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => RegisterCubit())
       ],
       child: MaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+        theme: ThemeData(scaffoldBackgroundColor: kPutih),
         title: "E Learning",
         debugShowCheckedModeBanner: false,
         navigatorKey: NAV_KEY,

@@ -88,11 +88,11 @@ class _Filldatascreen extends State<Filldatascreen> {
                     value: _kelas,
                     items: ['1', '2', '3', '4', '5', '6']
                         .map((label) => DropdownMenuItem(
+                              value: label,
                               child: Text(
                                 label,
                                 style: kHeading6.copyWith(color: kHitam),
                               ),
-                              value: label,
                             ))
                         .toList(),
                     onChanged: (value) {
@@ -141,7 +141,6 @@ class _Filldatascreen extends State<Filldatascreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    // height: 35,
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {

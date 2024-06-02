@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoginLoading) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Loading..')));
+              ..showSnackBar(const SnackBar(content: Text('Loading..')));
           }
           if (state is LoginFailure) {
             ScaffoldMessenger.of(context)
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
-            padding: EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 100),
             children: [
               const SafeArea(
                 child: Image(
@@ -111,15 +111,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 310,
                 height: 35,
                 margin: const EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
-                  border: Border.all(color: kHitam.withOpacity(0.5)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
                 child: Center(
                   child: TextFormField(
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(12)),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: kHitam),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: kHitam),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 7),
+                    ),
                     controller: emailEdc,
                   ),
                 ),
@@ -132,36 +137,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: kHeading6.copyWith(color: kHitam),
               ),
               Container(
+                margin: const EdgeInsets.only(top: 5),
                 width: 310,
                 height: 35,
-                margin: const EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
-                  border: Border.all(color: kHitam.withOpacity(0.5)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: TextFormField(
-                    controller: passEdc,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                      ),
-                      border: InputBorder.none,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          passInvisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            passInvisible = !passInvisible;
-                          });
-                        },
-                      ),
+                child: TextFormField(
+                  controller: passEdc,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: kHitam),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    obscureText: !passInvisible,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: kHitam),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        passInvisible ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          passInvisible = !passInvisible;
+                        });
+                      },
+                    ),
                   ),
+                  obscureText: !passInvisible,
                 ),
               ),
               const SizedBox(

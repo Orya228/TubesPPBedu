@@ -45,13 +45,13 @@ class _LiatProfile extends State<LiatProfile> {
         future: getUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           }
           if (!snapshot.hasData || !snapshot.data!.exists) {
-            return Center(child: Text("No data found"));
+            return const Center(child: Text("No data found"));
           }
           Map<String, dynamic> userData =
               snapshot.data!.data() as Map<String, dynamic>;
@@ -119,7 +119,7 @@ class _LiatProfile extends State<LiatProfile> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfile(),
+                        builder: (context) => const EditProfile(),
                       ),
                     );
                   },
@@ -149,7 +149,7 @@ class _LiatProfile extends State<LiatProfile> {
           const SizedBox(height: 11),
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: kLightGray,
               border: Border.all(color: kGray.withOpacity(0.5)),

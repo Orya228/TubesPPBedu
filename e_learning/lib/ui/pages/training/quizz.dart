@@ -97,7 +97,7 @@ class Quizz extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: kPutih,
-                        side: BorderSide(color: kBiru),
+                        side: const BorderSide(color: kBiru),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5))),
                     child: Text(

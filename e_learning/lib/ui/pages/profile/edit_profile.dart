@@ -50,12 +50,12 @@ class _EditProfile extends State<EditProfile> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Data berhasil Diubah')),
+        const SnackBar(content: Text('Data berhasil Diubah')),
       );
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
         (route) => false,
       );
     }
@@ -125,21 +125,21 @@ class _EditProfile extends State<EditProfile> {
                               TextFormField(
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  contentPadding: EdgeInsets.all(12),
+                                  contentPadding: const EdgeInsets.all(12),
                                 ),
                                 controller: _namaController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Nama tidak boleh kosong';
                                   }
-                                  print('isi data $value');
+
                                   return null;
                                 },
                               ),
@@ -150,24 +150,24 @@ class _EditProfile extends State<EditProfile> {
                               DropdownButtonFormField<String>(
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  contentPadding: EdgeInsets.all(12),
+                                  contentPadding: const EdgeInsets.all(12),
                                 ),
                                 value: _kelasController,
                                 items: ['1', '2', '3', '4', '5', '6']
                                     .map((label) => DropdownMenuItem(
+                                          value: label,
                                           child: Text(
                                             label,
                                             style: kHeading6.copyWith(
                                                 color: kHitam),
                                           ),
-                                          value: label,
                                         ))
                                     .toList(),
                                 onChanged: (value) {
@@ -189,14 +189,14 @@ class _EditProfile extends State<EditProfile> {
                               TextFormField(
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kHitam),
+                                    borderSide: const BorderSide(color: kHitam),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  contentPadding: EdgeInsets.all(12),
+                                  contentPadding: const EdgeInsets.all(12),
                                 ),
                                 controller: _tanggalLahirController,
                                 keyboardType: TextInputType.datetime,
@@ -229,7 +229,7 @@ class _EditProfile extends State<EditProfile> {
                   backgroundColor: kPutih,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
-                      side: BorderSide(color: kBiru)),
+                      side: const BorderSide(color: kBiru)),
                 ),
                 onPressed: _saveUserData,
                 child: Text(
