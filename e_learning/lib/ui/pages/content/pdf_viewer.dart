@@ -43,7 +43,6 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
     super.initState();
     _pdfViewerController = PdfViewerController();
 
-    // Add a delay to ensure the PDF is loaded before jumping to the page
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.open) {
         _pdfViewerController.jumpToPage(widget.halaman!);
