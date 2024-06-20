@@ -7,15 +7,35 @@ class MyPdfViewer extends StatefulWidget {
   // const MyPdfViewer({super.key});
   final String? judul;
   final String? dir;
+  final bool open;
 
   // MyPdfViewer({required this.judul});
-  const MyPdfViewer({Key? key, this.judul, this.dir}) : super(key: key);
+  const MyPdfViewer(
+      {Key? key, this.judul, required this.dir, required this.open})
+      : super(key: key);
 
   @override
   State<MyPdfViewer> createState() => _MyPdfViewerState();
 }
 
 class _MyPdfViewerState extends State<MyPdfViewer> {
+  late PdfViewerController _pdfViewerController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pdfViewerController = PdfViewerController();
+
+    // Add a delay to ensure the PDF is loaded before jumping to the page
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.open) {
+        _pdfViewerController.jumpToPage(2);
+      } else {
+        _pdfViewerController.jumpToPage(1);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +53,11 @@ class _MyPdfViewerState extends State<MyPdfViewer> {
           },
         ),
       ),
-      body: SfPdfViewer.asset('${widget.dir}'),
+      body: SfPdfViewer.asset(
+        '${widget.dir}',
+        controller: _pdfViewerController,
+      ),
+      // body: SfPdfViewer.asset('${widget.dir}'),
       // body: SfPdfViewer.asset('assets/buku/kelas_1-pkn.pdf'),
     );
   }

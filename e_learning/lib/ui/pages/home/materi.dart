@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
 import 'package:e_learning/ui/pages/content/pdf_viewer.dart';
@@ -35,18 +37,21 @@ class Materi extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
             children: [
-              _listMateri(context, 'Bahasa Indonesia', 'indonesia', '$lib1'),
-              _listMateri(context, 'Matematika', 'matematika', '$lib1'),
               _listMateri(
-                  context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa', '$lib1'),
+                  context, 'Bahasa Indonesia', 'indonesia', '$lib1', false),
+              _listMateri(context, 'Matematika', 'matematika', '$lib1', false),
+              _listMateri(context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa',
+                  '$lib1', false),
+              _listMateri(context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips',
+                  '$lib1', false),
               _listMateri(
-                  context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips', '$lib1'),
+                  context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1', false),
               _listMateri(
-                  context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1'),
-              _listMateri(context, 'Pendidikan Agama Islam', 'agama', '$lib1'),
-              _listMateri(context, 'Seni Budaya', 'seni_budaya', '$lib1'),
-              _listMateri(context, 'PJOK', 'pjok', '$lib1'),
-              _listMateri(context, 'Bahasa Inggris', 'english', '$lib1'),
+                  context, 'Pendidikan Agama Islam', 'agama', '$lib1', false),
+              _listMateri(
+                  context, 'Seni Budaya', 'seni_budaya', '$lib1', false),
+              _listMateri(context, 'PJOK', 'pjok', '$lib1', false),
+              _listMateri(context, 'Bahasa Inggris', 'english', '$lib1', false),
             ],
           ),
         ),
@@ -54,8 +59,8 @@ class Materi extends StatelessWidget {
     );
   }
 
-  Widget _listMateri(
-      BuildContext context, String nama, String gambar, String lib1) {
+  Widget _listMateri(BuildContext context, String nama, String gambar,
+      String lib1, bool open) {
     String directory = getDirectory(lib1, gambar);
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
@@ -95,8 +100,11 @@ class Materi extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MyPdfViewer(judul: nama, dir: directory),
+                              builder: (context) => MyPdfViewer(
+                                judul: nama,
+                                dir: directory,
+                                open: open,
+                              ),
                             ),
                           );
                         },

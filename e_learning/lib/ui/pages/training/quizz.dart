@@ -90,8 +90,11 @@ class Quizz extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              MyPdfViewer(judul: nama, dir: directory),
+                          builder: (context) => MyPdfViewer(
+                            judul: nama,
+                            dir: directory,
+                            open: false,
+                          ),
                         ),
                       );
                     },
