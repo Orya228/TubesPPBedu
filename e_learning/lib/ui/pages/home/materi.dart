@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
 import 'package:e_learning/ui/pages/content/pdf_viewer.dart';
@@ -12,6 +10,10 @@ class Materi extends StatelessWidget {
 
   String getDirectory(String kelas, String buku) {
     return 'assets/buku/$kelas-$buku.pdf';
+  }
+
+  String getSampul(String buku) {
+    return 'assets/sampul/$buku.png';
   }
 
   const Materi({Key? key, this.kelas, this.lib1}) : super(key: key);
@@ -37,21 +39,23 @@ class Materi extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
             children: [
-              _listMateri(
-                  context, 'Bahasa Indonesia', 'indonesia', '$lib1', false),
-              _listMateri(context, 'Matematika', 'matematika', '$lib1', false),
+              _listMateri(context, 'Bahasa Indonesia', 'indonesia', '$lib1',
+                  false, '$kelas'),
+              _listMateri(context, 'Matematika', 'matematika', '$lib1', false,
+                  '$kelas'),
               _listMateri(context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa',
-                  '$lib1', false),
+                  '$lib1', false, '$kelas'),
               _listMateri(context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips',
-                  '$lib1', false),
-              _listMateri(
-                  context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1', false),
-              _listMateri(
-                  context, 'Pendidikan Agama Islam', 'agama', '$lib1', false),
-              _listMateri(
-                  context, 'Seni Budaya', 'seni_budaya', '$lib1', false),
-              _listMateri(context, 'PJOK', 'pjok', '$lib1', false),
-              _listMateri(context, 'Bahasa Inggris', 'english', '$lib1', false),
+                  '$lib1', false, '$kelas'),
+              _listMateri(context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1',
+                  false, '$kelas'),
+              _listMateri(context, 'Pendidikan Agama Islam', 'agama', '$lib1',
+                  false, '$kelas'),
+              _listMateri(context, 'Seni Budaya', 'seni_budaya', '$lib1', false,
+                  '$kelas'),
+              _listMateri(context, 'PJOK', 'pjok', '$lib1', false, '$kelas'),
+              _listMateri(context, 'Bahasa Inggris', 'english', '$lib1', false,
+                  '$kelas'),
             ],
           ),
         ),
@@ -59,9 +63,10 @@ class Materi extends StatelessWidget {
     );
   }
 
-  Widget _listMateri(BuildContext context, String nama, String gambar,
-      String lib1, bool open) {
-    String directory = getDirectory(lib1, gambar);
+  Widget _listMateri(BuildContext context, String nama, String buku,
+      String lib1, bool open, String jenis) {
+    String directory = getDirectory(lib1, buku);
+    String sampul = getSampul(buku);
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Card(
@@ -85,7 +90,7 @@ class Materi extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Image.asset('assets/sampul/$gambar.png'),
+              Image.asset(sampul),
               const SizedBox(
                 height: 12,
               ),
@@ -104,6 +109,9 @@ class Materi extends StatelessWidget {
                                 judul: nama,
                                 dir: directory,
                                 open: open,
+                                sampul: sampul,
+                                jenis: kelas,
+                                buku: nama,
                               ),
                             ),
                           );

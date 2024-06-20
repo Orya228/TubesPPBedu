@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_learning/styles/colors.dart';
 import 'package:e_learning/styles/text_style.dart';
+import 'package:e_learning/ui/pages/content/pdf_viewer.dart';
 import 'package:e_learning/ui/pages/home/materi.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final user = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +67,94 @@ class HomePage extends StatelessWidget {
             Text(
               'Continue Learning',
               style: kTitle2.copyWith(color: kHitam),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('pdf_views')
+                    .where('user', isEqualTo: user)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return Center(child: Text('No data available'));
+                  }
+
+                  final pdfViews = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    itemCount: pdfViews.length,
+                    itemBuilder: (context, index) {
+                      final pdfView = pdfViews[index];
+                      final sampul = pdfView['sampul'] ?? '';
+                      final jenis = pdfView['jenis'] ?? '';
+                      final judul = pdfView['judul'] ?? '';
+                      final directory = pdfView['directory'] ?? '';
+                      final pageNumber = pdfView['page_number'] ?? '';
+                      final docId = pdfView.id;
+
+                      return Card(
+                        color: kPutih,
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(color: kBgGray)),
+                        child: Stack(
+                          children: [
+                            ListTile(
+                              leading: Image.asset(sampul,
+                                  width: 50, height: 50, fit: BoxFit.cover),
+                              title: Text(jenis,
+                                  style: kTitle2.copyWith(color: kHitam)),
+                              subtitle: Text(judul,
+                                  style: kSubtitle3.copyWith(
+                                      color: kDarkGray.withOpacity(0.8))),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyPdfViewer(
+                                      judul: judul,
+                                      dir: directory,
+                                      open: true,
+                                      sampul: sampul,
+                                      jenis: jenis,
+                                      buku: judul,
+                                      halaman: pageNumber,
+                                      docId: docId,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            Positioned(
+                              right: 0,
+                              child: IconButton(
+                                icon: Image.asset('assets/icons/close.png',
+                                    width: 24, height: 24),
+                                onPressed: () async {
+                                  await FirebaseFirestore.instance
+                                      .collection('pdf_views')
+                                      .doc(docId)
+                                      .delete();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),

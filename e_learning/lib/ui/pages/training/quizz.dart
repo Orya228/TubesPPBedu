@@ -10,6 +10,10 @@ class Quizz extends StatelessWidget {
     return 'assets/buku/Quiz-kelas_1-agama.pdf';
   }
 
+  String getSampul(String buku) {
+    return 'assets/sampul/$buku.png';
+  }
+
   const Quizz({super.key, this.kelas, this.lib1});
 
   @override
@@ -34,17 +38,23 @@ class Quizz extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           child: ListView(
             children: [
-              _listQuizz(context, 'Bahasa Indonesia', 'indonesia', '$lib1'),
-              _listQuizz(context, 'Matematika', 'matematika', '$lib1'),
               _listQuizz(
-                  context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa', '$lib1'),
+                  context, 'Bahasa Indonesia', 'indonesia', '$lib1', '$kelas'),
               _listQuizz(
-                  context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips', '$lib1'),
-              _listQuizz(context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1'),
-              _listQuizz(context, 'Pendidikan Agama Islam', 'agama', '$lib1'),
-              _listQuizz(context, 'Seni Budaya', 'seni_budaya', '$lib1'),
-              _listQuizz(context, 'PJOK', 'pjok', '$lib1'),
-              _listQuizz(context, 'Bahasa Inggris', 'english', '$lib1'),
+                  context, 'Matematika', 'matematika', '$lib1', '$kelas'),
+              _listQuizz(context, 'Ilmu Pengetahuan Alam (IPA)', 'ipa', '$lib1',
+                  '$kelas'),
+              _listQuizz(context, 'Ilmu Pengetahuan Sosial (IPS)', 'ips',
+                  '$lib1', '$kelas'),
+              _listQuizz(context, 'Pendidikan Kewarganegaraan', 'pkn', '$lib1',
+                  '$kelas'),
+              _listQuizz(context, 'Pendidikan Agama Islam', 'agama', '$lib1',
+                  '$kelas'),
+              _listQuizz(
+                  context, 'Seni Budaya', 'seni_budaya', '$lib1', '$kelas'),
+              _listQuizz(context, 'PJOK', 'pjok', '$lib1', '$kelas'),
+              _listQuizz(
+                  context, 'Bahasa Inggris', 'english', '$lib1', '$kelas'),
             ],
           ),
         ),
@@ -52,9 +62,10 @@ class Quizz extends StatelessWidget {
     );
   }
 
-  Padding _listQuizz(
-      BuildContext context, String nama, String gambar, String lib1) {
+  Padding _listQuizz(BuildContext context, String nama, String gambar,
+      String lib1, String kelas) {
     String directory = getDirectory(lib1, gambar);
+    String sampul = getSampul(gambar);
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Card(
@@ -78,7 +89,7 @@ class Quizz extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Image.asset('assets/sampul/$gambar.png'),
+              Image.asset(sampul),
               const SizedBox(
                 height: 12,
               ),
@@ -94,6 +105,9 @@ class Quizz extends StatelessWidget {
                             judul: nama,
                             dir: directory,
                             open: false,
+                            sampul: sampul,
+                            jenis: 'Quizz $kelas',
+                            buku: nama,
                           ),
                         ),
                       );
