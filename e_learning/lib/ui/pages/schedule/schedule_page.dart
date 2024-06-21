@@ -17,18 +17,6 @@ class ScheduleScreen extends StatelessWidget {
           ScheduleItem(className: 'Kelas 6', context: context),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.schedule), label: 'Schedule'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.fitness_center), label: 'Training'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        currentIndex: 1,
-        selectedItemColor: Colors.blue,
-      ),
     );
   }
 }
